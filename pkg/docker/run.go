@@ -31,7 +31,10 @@ var containerIDRegex = regexp.MustCompile("^[a-f0-9]+$")
 // Run creates a container with "docker run", with some error handling
 // it will return the ID of the created container if any, even on error
 func Run(image string, runArgs []string, containerArgs []string) (id string, err error) {
-	args := []string{"run"}
+	args := []string{
+		"run",
+		"--net=host",
+	}
 	args = append(args, runArgs...)
 	args = append(args, image)
 	args = append(args, containerArgs...)
